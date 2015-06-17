@@ -1,0 +1,48 @@
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\PostProcessing.xnb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Simple.xnb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Texture.xnb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\Teapot.xnb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Normal Maps\CobblestonesNormal.xnb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Textures\CobblestonesDiffuse.xnb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\GraphicsPractical3.exe
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\GraphicsPractical3.pdb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.csprojResolveAssemblyReference.cache
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.exe
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.pdb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\bunny.xnb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\femalehead.xnb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Environment Maps\uffizi_cross.xnb
+C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Environment Maps\uffizi_diff_cross.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\PostProcessing.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Simple.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Texture.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\Teapot.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\bunny.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\femalehead.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Normal Maps\CobblestonesNormal.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Textures\CobblestonesDiffuse.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Environment Maps\uffizi_cross.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Environment Maps\uffizi_diff_cross.xnb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\GraphicsPractical3.exe
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\GraphicsPractical3.pdb
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.csprojResolveAssemblyReference.cache
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.exe
+C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.pdb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\PostProcessing.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Simple.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Texture.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\Teapot.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\bunny.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\femalehead.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Normal Maps\CobblestonesNormal.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Textures\CobblestonesDiffuse.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Environment Maps\uffizi_cross.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Environment Maps\uffizi_diff_cross.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\GraphicsPractical3.exe
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\GraphicsPractical3.pdb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.csprojResolveAssemblyReference.cache
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.exe
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.pdb

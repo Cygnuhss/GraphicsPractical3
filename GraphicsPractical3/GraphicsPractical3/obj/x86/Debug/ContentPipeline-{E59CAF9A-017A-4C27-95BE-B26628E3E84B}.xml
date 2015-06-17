@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Effects\PostProcessing.fx</Source>
+      <Name>Effects\PostProcessing</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\PostProcessing.xnb</Output>
+      <Time>2015-06-17T18:16:46.5947073+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Effects\Simple.fx</Source>
+      <Name>Effects\Simple</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Simple.xnb</Output>
+      <Time>2015-06-16T17:20:16+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Effects\Texture.fx</Source>
+      <Name>Effects\Texture</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Texture.xnb</Output>
+      <Time>2015-06-17T18:17:04.8517516+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Teapot.fbx</Source>
+      <Name>Models\Teapot</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\Teapot.xnb</Output>
+      <Time>2015-06-09T10:20:36+02:00</Time>
+      <Dependency>
+        <Key>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Models\Teapot_0.xml</Key>
+        <Value>2015-06-17T18:14:20.706363+02:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Models\bunny.fbx</Source>
+      <Name>Models\bunny</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\bunny.xnb</Output>
+      <Time>2015-06-16T02:22:56+02:00</Time>
+      <Dependency>
+        <Key>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Models\bunny_0.xml</Key>
+        <Value>2015-06-17T18:14:20.8573716+02:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Models\femalehead.fbx</Source>
+      <Name>Models\femalehead</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Models\femalehead.xnb</Output>
+      <Time>2015-06-16T02:22:56+02:00</Time>
+      <Dependency>
+        <Key>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Models\femalehead_0.xml</Key>
+        <Value>2015-06-17T18:14:21.1123862+02:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Normal Maps\CobblestonesNormal.png</Source>
+      <Name>Normal Maps\CobblestonesNormal</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Normal Maps\CobblestonesNormal.xnb</Output>
+      <Time>2015-06-09T10:20:36+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\CobblestonesDiffuse.png</Source>
+      <Name>Textures\CobblestonesDiffuse</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Textures\CobblestonesDiffuse.xnb</Output>
+      <Time>2015-06-09T10:20:36+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Environment Maps\uffizi_cross.jpg</Source>
+      <Name>Environment Maps\uffizi_cross</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Environment Maps\uffizi_cross.xnb</Output>
+      <Time>2015-06-16T02:22:56+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Environment Maps\uffizi_diff_cross.jpg</Source>
+      <Name>Environment Maps\uffizi_diff_cross</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Environment Maps\uffizi_diff_cross.xnb</Output>
+      <Time>2015-06-16T02:22:56+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\Teapot.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Models\Teapot_0.xml</Output>
+      <Time>2015-06-09T10:20:36+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\bunny.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Models\bunny_0.xml</Output>
+      <Time>2015-06-16T02:22:56+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\femalehead.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Models\femalehead_0.xml</Output>
+      <Time>2015-06-16T02:22:56+02:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{E59CAF9A-017A-4C27-95BE-B26628E3E84B}</ContentProjectGUID>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>HiDef</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2014-06-07T23:09:29.3670857+02:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
