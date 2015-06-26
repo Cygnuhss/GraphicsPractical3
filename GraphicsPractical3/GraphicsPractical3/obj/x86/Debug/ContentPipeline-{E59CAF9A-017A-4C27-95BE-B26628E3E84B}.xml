@@ -8,7 +8,7 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\PostProcessing.xnb</Output>
-      <Time>2015-06-17T18:16:46.5947073+02:00</Time>
+      <Time>2015-06-26T13:48:31.4643666+02:00</Time>
     </Item>
     <Item>
       <Source>Effects\Simple.fx</Source>
@@ -17,7 +17,7 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Simple.xnb</Output>
-      <Time>2015-06-16T17:20:16+02:00</Time>
+      <Time>2015-06-26T14:00:47.2194494+02:00</Time>
     </Item>
     <Item>
       <Source>Effects\Texture.fx</Source>
@@ -26,7 +26,7 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Texture.xnb</Output>
-      <Time>2015-06-17T18:17:04.8517516+02:00</Time>
+      <Time>2015-06-26T14:00:40.0030366+02:00</Time>
     </Item>
     <Item>
       <Source>Models\Teapot.fbx</Source>
@@ -38,7 +38,7 @@
       <Time>2015-06-09T10:20:36+02:00</Time>
       <Dependency>
         <Key>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Models\Teapot_0.xml</Key>
-        <Value>2015-06-17T18:14:20.706363+02:00</Value>
+        <Value>2015-06-25T11:09:09.9029807+02:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -51,7 +51,7 @@
       <Time>2015-06-16T02:22:56+02:00</Time>
       <Dependency>
         <Key>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Models\bunny_0.xml</Key>
-        <Value>2015-06-17T18:14:20.8573716+02:00</Value>
+        <Value>2015-06-25T11:09:10.1029922+02:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -64,7 +64,7 @@
       <Time>2015-06-16T02:22:56+02:00</Time>
       <Dependency>
         <Key>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Models\femalehead_0.xml</Key>
-        <Value>2015-06-17T18:14:21.1123862+02:00</Value>
+        <Value>2015-06-25T11:09:10.4390114+02:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -123,6 +123,15 @@
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Models\femalehead_0.xml</Output>
       <Time>2015-06-16T02:22:56+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\Font.spritefont</Source>
+      <Name>Fonts\Font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Fonts\Font.xnb</Output>
+      <Time>2015-06-26T13:49:47.6787258+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

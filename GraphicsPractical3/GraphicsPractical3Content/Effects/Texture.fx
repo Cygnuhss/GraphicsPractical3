@@ -43,18 +43,6 @@ sampler2D textureSampler = sampler_state
 	AddressV = Wrap;
 };
 
-// Variables for normal maps.
-bool HasNormalMap;
-float DisplacementFactor;
-texture NormalMap;
-sampler2D displacementSampler = sampler_state {
-	Texture = (NormalMap);
-	MinFilter = Linear;
-	MagFilter = Linear;
-	AddressU = Wrap;
-	AddressV = Wrap;
-};
-
 //---------------------------------- Input / Output structures ----------------------------------
 
 // Each member of the struct has to be given a "semantic", to indicate what kind of data should go in
@@ -64,8 +52,6 @@ struct VertexShaderInput
 {
 	float4 Position : POSITION0;
 	float4 Normal : NORMAL0;
-	float3 Tangent : TANGENT0;
-	float3 Binormal : BINORMAL0;
 	float2 TextureCoordinate : TEXCOORD0;
 };
 
@@ -83,10 +69,8 @@ struct VertexShaderOutput
 	float4 Color: COLOR0;
 	float2 TextureCoordinate: TEXCOORD0;
 	float4 Normal : TEXCOORD1;
-	float3 Tangent : TEXCOORD2;
-	float3 Binormal : TEXCOORD3;
-	// Storing the 3D position in TEXCOORD4, because the POSITION0 semantic cannot be used in the pixel shader.
-	float3 WorldPos : TEXCOORD4;
+	// Storing the 3D position in TEXCOORD2, because the POSITION0 semantic cannot be used in the pixel shader.
+	float3 WorldPos : TEXCOORD2;
 };
 
 //--------------------------------------- Technique: Texture ---------------------------------------
@@ -101,10 +85,8 @@ VertexShaderOutput TextureVertexShader(VertexShaderInput input)
 		float4 viewPosition = mul(worldPosition, View);
 		output.Position = mul(viewPosition, Projection);
 
-	// Relay the input normal, tangent and binormal.
+	// Relay the input normal.
 	output.Normal = normalize(mul(input.Normal, WorldInverseTranspose));
-	output.Tangent = normalize(mul(input.Tangent, WorldInverseTranspose));
-	output.Binormal = normalize(mul(input.Binormal, WorldInverseTranspose));
 	// Relay the texture coordinates.
 	output.TextureCoordinate = input.TextureCoordinate;
 
@@ -119,19 +101,14 @@ VertexShaderOutput TextureVertexShader(VertexShaderInput input)
 
 float4 TexturePixelShader(VertexShaderOutput input) : COLOR0
 {
-	// Calculate the normal, including the information in the displacement map.
-	float3 displacement = DisplacementFactor * (tex2D(displacementSampler, input.TextureCoordinate) - (0.5, 0.5, 0.5));
-	float3 displacementNormal = input.Normal + (displacement.x * input.Tangent + displacement.y * input.Binormal);
-	displacementNormal = normalize(displacementNormal);
-
-	// Calculate the diffuse light component with the displacement map normal.
-	float diffuseIntensity = dot(normalize(-LightPositions[0]), displacementNormal);
+	// Calculate the diffuse light component.
+	float diffuseIntensity = dot(normalize(-LightPositions[0]), input.Normal);
 	if (diffuseIntensity < 0)
 		diffuseIntensity = 0;
 
-	// Calculate the specular light component with the displacement map normal.
+	// Calculate the specular light component.
 	float3 light = normalize(LightPositions[0]);
-		float3 r = normalize(2 * dot(light, displacementNormal) * displacementNormal - light);
+		float3 r = normalize(2 * dot(light, input.Normal) * input.Normal - light);
 		float3 v = normalize(mul(normalize(EyePos), World));
 		float dotProduct = dot(r, v);
 

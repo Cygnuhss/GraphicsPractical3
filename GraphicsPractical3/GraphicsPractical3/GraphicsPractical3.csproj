@@ -75,12 +75,10 @@
     <Compile Include="Camera.cs" />
     <Compile Include="FrameRateCounter.cs" />
     <Compile Include="GaussianBlur.cs" />
-    <Compile Include="TextureMaterial.cs" />
-    <Compile Include="SimpleMaterial.cs" />
+    <Compile Include="Material.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="VertexPositionNormalTangentBinormalTexture.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

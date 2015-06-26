@@ -1,6 +1,8 @@
 //------------------------------------------- Defines -------------------------------------------
 
 #define Pi 3.14159265
+#define RADIUS  7
+#define KERNEL_SIZE (RADIUS * 2 + 1)
 
 //------------------------------------- Top Level Variables -------------------------------------
 
@@ -22,6 +24,10 @@ float Gamma;
 bool isGrayscale;
 // Turn gaussian blur on or off.
 bool isGaussian;
+
+// Gaussian blur variables.
+float weights[KERNEL_SIZE];
+float2 offsets[KERNEL_SIZE];
 
 //------------------------------------------ Functions ------------------------------------------
 
@@ -57,7 +63,8 @@ float4 PostProcessingPixelShader(float2 TextureCoordinate : TEXCOORD0) : COLOR0
 
 	if (isGaussian)
 	{
-		// TODO apply gaussian blur
+		for (int i = 0; i < KERNEL_SIZE; ++i)
+			color += tex2D(TextureSampler, TextureCoordinate + offsets[i]) * weights[i];
 	}
 
 	return outputColor;

@@ -31,6 +31,18 @@ float SpecularIntensity;
 float SpecularPower;
 float3 EyePos;
 
+// Variables for texturing.
+bool HasTexture;
+texture DiffuseTexture;
+sampler2D textureSampler = sampler_state
+{
+	Texture = (DiffuseTexture);
+	MinFilter = Linear;
+	MagFilter = Linear;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
 //---------------------------------- Input / Output structures ----------------------------------
 
 // Each member of the struct has to be given a "semantic", to indicate what kind of data should go in

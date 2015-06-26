@@ -8,3 +8,4 @@ Content\Normal Maps\CobblestonesNormal.xnb
 Content\Textures\CobblestonesDiffuse.xnb
 Content\Environment Maps\uffizi_cross.xnb
 Content\Environment Maps\uffizi_diff_cross.xnb
+Content\Fonts\Font.xnb

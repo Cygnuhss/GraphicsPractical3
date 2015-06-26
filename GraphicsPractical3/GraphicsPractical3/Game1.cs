@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Text;
 
 namespace GraphicsPractical3
 {
@@ -23,23 +24,47 @@ namespace GraphicsPractical3
 
         // Model
         private Model model;
-        private SimpleMaterial modelMaterial;
+        private Material modelMaterial;
 
         // Quad
-        private VertexPositionNormalTangentBinormalTexture[] quadVertices;
+        private VertexPositionNormalTexture[] quadVertices;
         private short[] quadIndices;
         private Matrix quadTransform;
         private Effect textureEffect;
 
         // Quad material
-        private TextureMaterial quadMaterial;
+        private Material quadMaterial;
         private Texture2D floorTexture;
+
+        // Lights
+        Vector3[] directionalLights;
+        Vector4[] directionalColors;
+
+        // Keyboard input
+        private KeyboardState currentKeyboardState;
+        private KeyboardState prevKeyboardState;
+
+        // Different assignment views
+        private enum Views { MultipleLightSources, ColorFilter, GaussianBlur };
+        private Views currentView;
+        // Font for displaying explanations
+        private SpriteFont spriteFont;
+        private Vector2 fontPosition;
 
         // Render target for post-processing
         private RenderTarget2D renderTarget;
 
         // Post-processing effect
         private Effect postprocessingEffect;
+
+        // Gaussian blur
+        private const int BLUR_RADIUS = 7;
+        private const float BLUR_AMOUNT = 2.0f;
+        private GaussianBlur gaussianBlur;
+        private bool isGaussianBlurred;
+
+        // Grayscale
+        private bool isGrayscale;
 
         public Game1()
         {
@@ -66,7 +91,23 @@ namespace GraphicsPractical3
             // Initialize the camera
             this.camera = new Camera(new Vector3(0, 50, 100), new Vector3(0, 0, 0), new Vector3(0, 1, 0));
 
+            // Setup the initial input states.
+            currentKeyboardState = Keyboard.GetState();
             this.IsMouseVisible = true;
+
+            // Initialize the text position.
+            fontPosition = new Vector2(1.0f, 1.0f);
+
+            // Initialize the current view.
+            currentView = Views.MultipleLightSources;
+
+            // Create the Gaussian blur filter kernel.
+            gaussianBlur = new GaussianBlur(this);
+            gaussianBlur.ComputeKernel(BLUR_RADIUS, BLUR_AMOUNT);
+            isGaussianBlurred = false;
+
+            // Initialize the grayscale effect.
+            isGrayscale = false;
 
             // Set the render target.
             renderTarget = new RenderTarget2D(
@@ -77,6 +118,23 @@ namespace GraphicsPractical3
                 GraphicsDevice.PresentationParameters.BackBufferFormat,
                 DepthFormat.Depth24);
 
+            // Directional lights.
+            Vector3 directionalLight1 = new Vector3(-40.0f, 30.0f, 23.0f);
+            Vector3 directionalLight2 = new Vector3(-27.0f, 37.0f, 32.0f);
+            Vector3 directionalLight3 = new Vector3(49.0f, 27.0f, 19.0f);
+            directionalLights = new Vector3[5];
+            directionalLights[0] = directionalLight1;
+            directionalLights[1] = directionalLight2;
+            directionalLights[2] = directionalLight3;
+            directionalLights[3] = directionalLight1;
+            directionalLights[4] = directionalLight2;
+            directionalColors = new Vector4[5];
+            directionalColors[0] = Color.BlanchedAlmond.ToVector4();
+            directionalColors[1] = Color.PeachPuff.ToVector4();
+            directionalColors[2] = Color.Coral.ToVector4();
+            directionalColors[3] = Color.CornflowerBlue.ToVector4();
+            directionalColors[4] = Color.PapayaWhip.ToVector4();
+
             base.Initialize();
         }
 
@@ -85,6 +143,8 @@ namespace GraphicsPractical3
             floorTexture = Content.Load<Texture2D>("Textures/CobblestonesDiffuse");
             // Create a SpriteBatch object.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            // Load the font.
+            spriteFont = Content.Load<SpriteFont>("Fonts/Font");
             // Load the "Simple" effect.
             Effect simpleEffect = this.Content.Load<Effect>("Effects/Simple");
             // Load the model and let it use the "Simple" effect.
@@ -97,13 +157,15 @@ namespace GraphicsPractical3
             this.textureEffect = Content.Load<Effect>("Effects/Texture");
 
             // Setup the material.
-            this.modelMaterial = new SimpleMaterial();
+            this.modelMaterial = new Material();
             // Set the ambient color.
             this.modelMaterial.AmbientColor = Color.Gray;
             // Set the ambient intensity.
             this.modelMaterial.AmbientIntensity = 0.2f;
             // Set the diffuse color.
             this.modelMaterial.DiffuseColor = Color.Gray;
+            // Set no texture.
+            this.quadMaterial.DiffuseTexture = null;
             // Set the specular color.
             this.modelMaterial.SpecularColor = Color.White;
             // Set the specular intensity.
@@ -125,37 +187,29 @@ namespace GraphicsPractical3
             // Normal points up
             Vector3 quadNormal = new Vector3(0, 1, 0);
 
-            this.quadVertices = new VertexPositionNormalTangentBinormalTexture[4];
+            this.quadVertices = new VertexPositionNormalTexture[4];
             // Top left
             this.quadVertices[0].Position = new Vector3(-1, 0, -1);
             this.quadVertices[0].Normal = quadNormal;
-            this.quadVertices[0].Tangent = new Vector3(-1, 1, -1);
-            this.quadVertices[0].Binormal = new Vector3(1, 0, 1);
             this.quadVertices[0].TextureCoordinate = new Vector2(0.0f, 0.0f);
             // Top right
             this.quadVertices[1].Position = new Vector3(1, 0, -1);
             this.quadVertices[1].Normal = quadNormal;
-            this.quadVertices[1].Tangent = new Vector3(1, 0, -1);
-            this.quadVertices[1].Binormal = new Vector3(-1, 0, 1);
             this.quadVertices[1].TextureCoordinate = new Vector2(2.0f, 0.0f);
             // Bottom left
             this.quadVertices[2].Position = new Vector3(-1, 0, 1);
             this.quadVertices[2].Normal = quadNormal;
-            this.quadVertices[2].Tangent = new Vector3(-1, 0, 1);
-            this.quadVertices[2].Binormal = new Vector3(1, 0, -1);
             this.quadVertices[2].TextureCoordinate = new Vector2(0.0f, 2.0f);
             // Bottom right
             this.quadVertices[3].Position = new Vector3(1, 0, 1);
             this.quadVertices[3].Normal = quadNormal;
-            this.quadVertices[3].Tangent = new Vector3(1, 0, 1);
-            this.quadVertices[3].Binormal = new Vector3(-1, 0, -1);
             this.quadVertices[3].TextureCoordinate = new Vector2(2.0f, 2.0f);
 
             this.quadIndices = new short[] { 0, 1, 2, 1, 2, 3 };
             this.quadTransform = Matrix.CreateScale(scale);
 
             // Setup the material.
-            this.quadMaterial = new TextureMaterial();
+            this.quadMaterial = new Material();
             // Set the ambient color.
             this.quadMaterial.AmbientColor = Color.White;
             // Set the ambient intensity.
@@ -164,10 +218,6 @@ namespace GraphicsPractical3
             this.quadMaterial.DiffuseColor = Color.White;
             // Set the quad texture.
             this.quadMaterial.DiffuseTexture = this.Content.Load<Texture2D>("Textures/CobblestonesDiffuse");
-            // Set the displacement factor.
-            this.quadMaterial.DisplacementFactor = 1.0f;
-            // Set the normal displacement texture.
-            this.quadMaterial.NormalMap = Content.Load<Texture2D>("Normal Maps/CobblestonesNormal");
             // Set the specular color.
             this.quadMaterial.SpecularColor = Color.White;
             // Set the specular intensity.
@@ -183,7 +233,57 @@ namespace GraphicsPractical3
             // Update the window title
             this.Window.Title = "XNA Renderer | FPS: " + this.frameRateCounter.FrameRate;
 
+            HandleInput();
+
             base.Update(gameTime);
+        }
+
+        private void HandleInput()
+        {
+            prevKeyboardState = currentKeyboardState;
+            currentKeyboardState = Keyboard.GetState();
+
+            if (currentView == Views.MultipleLightSources)
+            {
+                if (KeyPressed(Keys.Enter))
+                { }
+
+                if (KeyPressed(Keys.Space))
+                    NextView();
+            }
+
+            if (currentView == Views.ColorFilter)
+            {
+                if (KeyPressed(Keys.Enter))
+                    isGrayscale = !isGrayscale;
+
+                if (KeyPressed(Keys.Space))
+                    NextView();
+            }
+
+            if (currentView == Views.GaussianBlur)
+            {
+                if (KeyPressed(Keys.Enter))
+                    isGaussianBlurred = !isGaussianBlurred;
+
+                if (KeyPressed(Keys.Space))
+                    NextView();
+            }
+        }
+
+        private bool KeyPressed(Keys key)
+        {
+            return currentKeyboardState.IsKeyDown(key) && prevKeyboardState.IsKeyUp(key);
+        }
+
+        private void NextView()
+        {
+            if (currentView == Views.MultipleLightSources)
+                currentView = Views.ColorFilter;
+            if (currentView == Views.ColorFilter)
+                currentView = Views.GaussianBlur;
+            if (currentView == Views.GaussianBlur)
+                currentView = Views.MultipleLightSources;
         }
 
         protected override void Draw(GameTime gameTime)
@@ -199,15 +299,18 @@ namespace GraphicsPractical3
             // no correction.
             postprocessingEffect.Parameters["Gamma"].SetValue(1.0f);
             // Turn grayscale on or off.
-            postprocessingEffect.Parameters["isGrayscale"].SetValue(false);
+            postprocessingEffect.Parameters["isGrayscale"].SetValue(isGrayscale);
             // Turn Gaussian blur on or off.
-            postprocessingEffect.Parameters["isGaussian"].SetValue(true);
+            postprocessingEffect.Parameters["isGaussian"].SetValue(isGaussianBlurred);
             // Apply gamma correction.
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque,
                         SamplerState.LinearClamp, DepthStencilState.Default,
                         RasterizerState.CullNone, postprocessingEffect);
 
             spriteBatch.Draw(renderTarget, new Rectangle(GraphicsDevice.Viewport.X, GraphicsDevice.Viewport.Y, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+
+            DrawText();
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -221,24 +324,6 @@ namespace GraphicsPractical3
             // Get the model's only mesh.
             ModelMesh mesh = this.model.Meshes[0];
             Effect simpleEffect = mesh.Effects[0];
-
-            // Directional light directions.
-            Vector3 directionalLight1 = new Vector3(-40.0f, 30.0f, 23.0f);
-            Vector3 directionalLight2 = new Vector3(-27.0f, 37.0f, 32.0f);
-            Vector3 directionalLight3 = new Vector3(49.0f, 27.0f, 19.0f);
-            Vector3[] directionalLights = new Vector3[5];
-            directionalLights[0] = directionalLight1;
-            directionalLights[1] = directionalLight2;
-            directionalLights[2] = directionalLight3;
-            directionalLights[3] = directionalLight1;
-            directionalLights[4] = directionalLight2;
-            Vector4[] directionalColors = new Vector4[5];
-            directionalColors[0] = Color.BlanchedAlmond.ToVector4();
-            directionalColors[1] = Color.PeachPuff.ToVector4();
-            directionalColors[2] = Color.Coral.ToVector4();
-            directionalColors[3] = Color.CornflowerBlue.ToVector4();
-            directionalColors[4] = Color.PapayaWhip.ToVector4();
-
 
             // Matrices for 3D perspective projection.
             Matrix world;
@@ -309,6 +394,38 @@ namespace GraphicsPractical3
 
             // Drop the render target.
             GraphicsDevice.SetRenderTarget(null);
+        }
+
+        private void DrawText()
+        {
+            StringBuilder buffer = new StringBuilder();
+
+            buffer.AppendFormat("Assignment: {0}\n", currentView.ToString());
+            buffer.AppendLine();
+
+            if (currentView == Views.MultipleLightSources)
+            {
+                buffer.AppendFormat("Number of lights: {0}\n", directionalLights.Length);
+                buffer.AppendLine();
+                buffer.AppendFormat("Press <SPACE> to proceed to: {0}", Views.ColorFilter.ToString());
+            }
+            if (currentView == Views.ColorFilter)
+            {
+                buffer.AppendLine("Press <ENTER> to enable/disable the grayscale");
+                buffer.AppendFormat("Press <SPACE> to proceed to: {0}", Views.ColorFilter.ToString());
+            }
+            if (currentView == Views.GaussianBlur)
+            {
+                buffer.AppendFormat("Radius: {0}\n", gaussianBlur.Radius);
+                buffer.AppendFormat("Sigma: {0}\n", gaussianBlur.Sigma.ToString("f2"));
+                buffer.AppendLine();
+                buffer.AppendLine("Press <ENTER> to enable/disable the Gaussian blur");
+                buffer.AppendFormat("Press <SPACE> to proceed to: {0}", Views.ColorFilter.ToString());
+            }
+
+            //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            spriteBatch.DrawString(spriteFont, buffer.ToString(), fontPosition, Color.White);
+            //spriteBatch.End();
         }
     }
 }
