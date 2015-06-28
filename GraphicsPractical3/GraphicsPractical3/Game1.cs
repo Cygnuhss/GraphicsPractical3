@@ -45,7 +45,7 @@ namespace GraphicsPractical3
         private KeyboardState prevKeyboardState;
 
         // Different assignment views
-        private enum Views { MultipleLightSources, ColorFilter, GaussianBlur };
+        private enum Views { MultipleLightSources, CelShading, ColorFilter, GaussianBlur };
         private Views currentView;
         // Font for displaying explanations
         private SpriteFont spriteFont;
@@ -56,6 +56,9 @@ namespace GraphicsPractical3
 
         // Post-processing effect
         private Effect postprocessingEffect;
+
+        // Cell shading
+        private bool isCelShaded;
 
         // Gaussian blur
         private const int BLUR_RADIUS = 7;
@@ -100,6 +103,9 @@ namespace GraphicsPractical3
 
             // Initialize the current view.
             currentView = Views.MultipleLightSources;
+
+            // Initialize the cel shading effect.
+            isCelShaded = false;
 
             // Create the Gaussian blur filter kernel.
             gaussianBlur = new GaussianBlur(this);
@@ -165,7 +171,7 @@ namespace GraphicsPractical3
             // Set the diffuse color.
             this.modelMaterial.DiffuseColor = Color.Gray;
             // Set no texture.
-            this.quadMaterial.DiffuseTexture = null;
+            this.modelMaterial.DiffuseTexture = null;
             // Set the specular color.
             this.modelMaterial.SpecularColor = Color.White;
             // Set the specular intensity.
@@ -252,6 +258,15 @@ namespace GraphicsPractical3
                     NextView();
             }
 
+            if (currentView == Views.CelShading)
+            {
+                if (KeyPressed(Keys.Enter))
+                    isCelShaded = false;
+
+                if (KeyPressed(Keys.Space))
+                    NextView();
+            }
+
             if (currentView == Views.ColorFilter)
             {
                 if (KeyPressed(Keys.Enter))
@@ -279,6 +294,8 @@ namespace GraphicsPractical3
         private void NextView()
         {
             if (currentView == Views.MultipleLightSources)
+                currentView = Views.CelShading;
+            if (currentView == Views.CelShading)
                 currentView = Views.ColorFilter;
             if (currentView == Views.ColorFilter)
                 currentView = Views.GaussianBlur;
@@ -299,9 +316,9 @@ namespace GraphicsPractical3
             // no correction.
             postprocessingEffect.Parameters["Gamma"].SetValue(1.0f);
             // Turn grayscale on or off.
-            postprocessingEffect.Parameters["isGrayscale"].SetValue(isGrayscale);
+            postprocessingEffect.Parameters["IsGrayscale"].SetValue(isGrayscale);
             // Turn Gaussian blur on or off.
-            postprocessingEffect.Parameters["isGaussian"].SetValue(isGaussianBlurred);
+            postprocessingEffect.Parameters["IsGaussianBlurred"].SetValue(isGaussianBlurred);
             // Apply gamma correction.
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque,
                         SamplerState.LinearClamp, DepthStencilState.Default,
@@ -347,6 +364,8 @@ namespace GraphicsPractical3
             simpleEffect.Parameters["LightColors"].SetValue(directionalColors);
             // Set the view direction.
             simpleEffect.Parameters["EyePos"].SetValue(this.camera.Eye);
+            // Turn cel shading on or off.
+            simpleEffect.Parameters["IsCelShaded"].SetValue(isCelShaded);
             // Set all the material parameters.
             this.modelMaterial.SetEffectParameters(simpleEffect);
 
@@ -378,7 +397,7 @@ namespace GraphicsPractical3
                 this.GraphicsDevice.DrawUserIndexedPrimitives(PrimitiveType.TriangleList,
                     this.quadVertices, 0, this.quadVertices.Length,
                     this.quadIndices, 0, this.quadIndices.Length / 3,
-                    VertexPositionNormalTangentBinormalTexture.VertexDeclaration);
+                    VertexPositionNormalTexture.VertexDeclaration);
             }
         }
 

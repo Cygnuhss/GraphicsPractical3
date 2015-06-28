@@ -21,9 +21,9 @@ sampler TextureSampler = sampler_state
 float Gamma;
 
 // Turn grayscale on or off.
-bool isGrayscale;
+bool IsGrayscale;
 // Turn gaussian blur on or off.
-bool isGaussian;
+bool IsGaussianBlurred;
 
 // Gaussian blur variables.
 float weights[KERNEL_SIZE];
@@ -52,7 +52,7 @@ float4 PostProcessingPixelShader(float2 TextureCoordinate : TEXCOORD0) : COLOR0
 	// Apply the gamma correction.
 	float4 outputColor = CalculateGamma(color);
 
-	if (isGrayscale)
+	if (IsGrayscale)
 	{
 		// Apply the grayscale.
 		float Y = outputColor.r * 0.3 + outputColor.g * 0.59 + outputColor.b * 0.11;
@@ -61,7 +61,7 @@ float4 PostProcessingPixelShader(float2 TextureCoordinate : TEXCOORD0) : COLOR0
 		outputColor.b = Y;
 	}
 
-	if (isGaussian)
+	if (IsGaussianBlurred)
 	{
 		for (int i = 0; i < KERNEL_SIZE; ++i)
 			color += tex2D(TextureSampler, TextureCoordinate + offsets[i]) * weights[i];

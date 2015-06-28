@@ -43,6 +43,9 @@ sampler2D textureSampler = sampler_state
 	AddressV = Wrap;
 };
 
+// Cel shading
+bool IsCelShaded;
+
 //---------------------------------- Input / Output structures ----------------------------------
 
 // Each member of the struct has to be given a "semantic", to indicate what kind of data should go in
@@ -70,7 +73,7 @@ struct VertexShaderOutput
 	float2 TextureCoordinate: TEXCOORD0;
 	float4 Normal : TEXCOORD1;
 	// Storing the 3D position in TEXCOORD2, because the POSITION0 semantic cannot be used in the pixel shader.
-	float4 Position3D : TEXCOORD2;
+	float4 WorldPos : TEXCOORD2;
 };
 
 //---------------------------------------- Technique: Simple ----------------------------------------
@@ -94,7 +97,7 @@ VertexShaderOutput SimpleVertexShader(VertexShaderInput input)
 	// will later be overridden by the diffuse color.
 	output.Color = input.Normal;
 	// Relay the POSITION0 information to the TEXCOORD2 semantic, for use in the pixel shader.
-	output.Position3D = input.Position;
+	output.WorldPos = input.Position;
 
 	// Correctly handle the normals with non-uniform scaling.
 	float4 normal = mul(input.Normal, WorldInverseTranspose);
@@ -112,33 +115,28 @@ float4 SimplePixelShader(VertexShaderOutput input) : COLOR0
 
 	for (int i = 0; i < MAX_LIGHTS; i++)
 	{
-		float direction = normalize(float4(LightPositions[i], 1) - input.Position3D);
+		float direction = normalize(float4(LightPositions[i], 1) - input.WorldPos);
 		float attenuation = 1.0f - saturate((direction - 11.0f) / 17.0f);
-		//if (LightPositions[i] != )
-		//{
+
 		// The color is proportional to the angle between the surface normal and direction to the light source.
 		// Surfaces pointing away from the light do not receive any light.
 		float lightIntensity = max(0, dot(input.Normal, direction));
 		// Take the diffuse color and intensity into account.
 		color += saturate(attenuation * LightColors[i] * DiffuseColor * DiffuseIntensity * lightIntensity);
-		//}
+
+		if (IsCelShaded)
+		{
+			// Discretize the intensity.
+			if (lightIntensity > 0.95)
+				color = float4(1.0, 1.0, 1.0, 1.0) * color;
+			else if (lightIntensity > 0.5)
+				color = float4(0.7, 0.7, 0.7, 1.0) * color;
+			else if (lightIntensity > 0.05)
+				color = float4(0.35, 0.35, 0.35, 1.0) * color;
+			else
+				color = float4(0.1, 0.1, 0.1, 1.0) * color;
+		}
 	}
-
-	/*for (int i = 0; i < MAX_LIGHTS; i++)
-	{
-		// The light vector l is the direction from the location to the light.
-		float3 l = -LightPositions[i];
-		// The normal vector n denotes the normal of the surface.
-		float3 n = input.Normal;
-		// The view vector v is the vector from the camera to the fragment.
-		float3 v = normalize(EyePos - input.WorldPos);
-		// Calculate the half vector, which is the bisector of the angle between the view vector v and light vector l.
-		float3 h = normalize(v + l);
-		float4 specular = SpecularColor * SpecularIntensity * pow(saturate(dot(n, h)), SpecularPower);
-
-		// Add the ambient and specular light to the already calculated diffuse light and texture.
-		color = saturate(color + ambient + specular);
-	}*/
 
 	return color;
 }

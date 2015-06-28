@@ -8,7 +8,7 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\PostProcessing.xnb</Output>
-      <Time>2015-06-26T13:48:31.4643666+02:00</Time>
+      <Time>2015-06-28T12:17:40.7243783+02:00</Time>
     </Item>
     <Item>
       <Source>Effects\Simple.fx</Source>
@@ -17,7 +17,7 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Effects\Simple.xnb</Output>
-      <Time>2015-06-26T14:00:47.2194494+02:00</Time>
+      <Time>2015-06-28T12:31:18.0481265+02:00</Time>
     </Item>
     <Item>
       <Source>Effects\Texture.fx</Source>
