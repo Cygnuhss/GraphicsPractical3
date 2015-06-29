@@ -24,7 +24,10 @@ namespace GraphicsPractical3
 
         // Model
         private Model model;
+        private Model model2;
+        private Model model3;
         private Material modelMaterial;
+        private Vector3 modelTranslation;
 
         // Quad
         private VertexPositionNormalTexture[] quadVertices;
@@ -156,6 +159,9 @@ namespace GraphicsPractical3
             // Load the model and let it use the "Simple" effect.
             this.model = this.Content.Load<Model>("Models/femalehead");
             this.model.Meshes[0].MeshParts[0].Effect = simpleEffect;
+            this.model2 = this.model;
+            this.model3 = this.model;
+            this.modelTranslation = Vector3.Zero;
 
             // Setup the quad.
             this.setupQuad();
@@ -234,12 +240,30 @@ namespace GraphicsPractical3
 
         protected override void Update(GameTime gameTime)
         {
-            float timeStep = (float)gameTime.ElapsedGameTime.TotalSeconds * 60.0f;
+            float timeStep = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             // Update the window title
             this.Window.Title = "XNA Renderer | FPS: " + this.frameRateCounter.FrameRate;
 
             HandleInput();
+
+            float deltaAngle = 0;
+            KeyboardState kbState = Keyboard.GetState();
+
+            // Use the Left and Right arrow keys to rotate the camera in the Y-axis.
+            if (kbState.IsKeyDown(Keys.Left))
+                deltaAngle += -3 * timeStep;
+            if (kbState.IsKeyDown(Keys.Right))
+                deltaAngle += 3 * timeStep;
+
+            if (deltaAngle != 0)
+            {
+                this.camera.Eye = Vector3.Transform(this.camera.Eye, Matrix.CreateRotationY(deltaAngle));
+            }
+
+            // Move the model around the world.
+            //this.modelTranslation.X += (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * Math.PI * 2f) * 0.5f;
+            this.modelTranslation.Z += (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * Math.PI * 2f) * 0.3f;
 
             base.Update(gameTime);
         }
@@ -353,7 +377,8 @@ namespace GraphicsPractical3
             // Uniform scale.
             world = Matrix.CreateScale(0.5f);
             // Replace 'world' with 'scale' for the non-uniform scale demo.
-            Matrix translate = world * Matrix.CreateTranslation(new Vector3(0, 8.5f, 0));
+            Vector3 translation = new Vector3(0, 8.5f, 0) + modelTranslation;
+            Matrix translate = world * Matrix.CreateTranslation(translation);
             simpleEffect.Parameters["World"].SetValue(translate);
             // Set world inverse transpose.
             worldInverseTransposeMatrix = Matrix.Transpose(Matrix.Invert(mesh.ParentBone.Transform * world));
@@ -370,6 +395,24 @@ namespace GraphicsPractical3
             this.modelMaterial.SetEffectParameters(simpleEffect);
 
             // Draw the model.
+            mesh.Draw();
+
+            // Draw a second model.
+            this.model2 = this.model;
+            mesh = this.model2.Meshes[0];
+            simpleEffect = mesh.Effects[0];
+            translation = new Vector3(-25f, 8.5f, 0) + modelTranslation;
+            translate = world * Matrix.CreateTranslation(translation);
+            simpleEffect.Parameters["World"].SetValue(translate);
+            mesh.Draw();
+
+            // Draw a third model.
+            this.model3 = this.model;
+            mesh = this.model3.Meshes[0];
+            simpleEffect = mesh.Effects[0];
+            translation = new Vector3(25f, 8.5f, 0) + modelTranslation;
+            translate = world * Matrix.CreateTranslation(translation);
+            simpleEffect.Parameters["World"].SetValue(translate);
             mesh.Draw();
 
             // Set the effect parameters.
