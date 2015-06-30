@@ -40,10 +40,9 @@ C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3
 C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Textures\CobblestonesDiffuse.xnb
 C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Environment Maps\uffizi_cross.xnb
 C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Environment Maps\uffizi_diff_cross.xnb
+C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Fonts\Font.xnb
 C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\GraphicsPractical3.exe
 C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\GraphicsPractical3.pdb
-C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.csprojResolveAssemblyReference.cache
 C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.exe
 C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\obj\x86\Debug\GraphicsPractical3.pdb
-C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3\bin\x86\Debug\Content\Fonts\Font.xnb

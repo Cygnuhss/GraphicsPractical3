@@ -119,9 +119,9 @@ float4 TexturePixelShader(VertexShaderOutput input) : COLOR0
 		textureColor.a = 1;
 
 	// Combine all of these values into one (including the ambient light).
-	float4 color = saturate(textureColor * (diffuseIntensity)+AmbientColor * AmbientIntensity + specular);
+	float4 color = saturate(textureColor * (diffuseIntensity)+ AmbientColor * AmbientIntensity + specular);
 
-		return color;
+	return color;
 }
 
 technique Texture

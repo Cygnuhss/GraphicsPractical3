@@ -28,6 +28,7 @@ namespace GraphicsPractical3
         private Model model3;
         private Material modelMaterial;
         private Vector3 modelTranslation;
+        private float modelRotation;
 
         // Quad
         private VertexPositionNormalTexture[] quadVertices;
@@ -127,6 +128,8 @@ namespace GraphicsPractical3
                 GraphicsDevice.PresentationParameters.BackBufferFormat,
                 DepthFormat.Depth24);
 
+            gaussianBlur.ComputeOffsets(GraphicsDevice.PresentationParameters.BackBufferWidth, GraphicsDevice.PresentationParameters.BackBufferHeight);
+
             // Directional lights.
             Vector3 directionalLight1 = new Vector3(-40.0f, 30.0f, 23.0f);
             Vector3 directionalLight2 = new Vector3(-27.0f, 37.0f, 32.0f);
@@ -162,6 +165,7 @@ namespace GraphicsPractical3
             this.model2 = this.model;
             this.model3 = this.model;
             this.modelTranslation = Vector3.Zero;
+            this.modelRotation = 0.0f;
 
             // Setup the quad.
             this.setupQuad();
@@ -245,39 +249,24 @@ namespace GraphicsPractical3
             // Update the window title
             this.Window.Title = "XNA Renderer | FPS: " + this.frameRateCounter.FrameRate;
 
-            HandleInput();
-
-            float deltaAngle = 0;
-            KeyboardState kbState = Keyboard.GetState();
-
-            // Use the Left and Right arrow keys to rotate the camera in the Y-axis.
-            if (kbState.IsKeyDown(Keys.Left))
-                deltaAngle += -3 * timeStep;
-            if (kbState.IsKeyDown(Keys.Right))
-                deltaAngle += 3 * timeStep;
-
-            if (deltaAngle != 0)
-            {
-                this.camera.Eye = Vector3.Transform(this.camera.Eye, Matrix.CreateRotationY(deltaAngle));
-            }
+            HandleInput(timeStep);
 
             // Move the model around the world.
             //this.modelTranslation.X += (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * Math.PI * 2f) * 0.5f;
-            this.modelTranslation.Z += (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * Math.PI * 2f) * 0.3f;
+            //this.modelTranslation.Z += (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * Math.PI * 2f) * 0.3f;
+            this.modelRotation += 0.3f * timeStep;
 
             base.Update(gameTime);
         }
 
-        private void HandleInput()
+        private void HandleInput(float timeStep)
         {
+            // Handle the input for view selection, enabling/disabling and rotating the camera.
             prevKeyboardState = currentKeyboardState;
             currentKeyboardState = Keyboard.GetState();
 
             if (currentView == Views.MultipleLightSources)
             {
-                if (KeyPressed(Keys.Enter))
-                { }
-
                 if (KeyPressed(Keys.Space))
                     NextView();
             }
@@ -285,7 +274,7 @@ namespace GraphicsPractical3
             if (currentView == Views.CelShading)
             {
                 if (KeyPressed(Keys.Enter))
-                    isCelShaded = false;
+                    isCelShaded = !isCelShaded;
 
                 if (KeyPressed(Keys.Space))
                     NextView();
@@ -308,6 +297,19 @@ namespace GraphicsPractical3
                 if (KeyPressed(Keys.Space))
                     NextView();
             }
+
+            float deltaAngle = 0;
+
+            // Use the Left and Right arrow keys to rotate the camera in the Y-axis.
+            if (currentKeyboardState.IsKeyDown(Keys.Left))
+                deltaAngle += -3 * timeStep;
+            if (currentKeyboardState.IsKeyDown(Keys.Right))
+                deltaAngle += 3 * timeStep;
+
+            if (deltaAngle != 0)
+            {
+                this.camera.Eye = Vector3.Transform(this.camera.Eye, Matrix.CreateRotationY(deltaAngle));
+            }
         }
 
         private bool KeyPressed(Keys key)
@@ -317,14 +319,20 @@ namespace GraphicsPractical3
 
         private void NextView()
         {
-            if (currentView == Views.MultipleLightSources)
-                currentView = Views.CelShading;
-            if (currentView == Views.CelShading)
-                currentView = Views.ColorFilter;
-            if (currentView == Views.ColorFilter)
-                currentView = Views.GaussianBlur;
-            if (currentView == Views.GaussianBlur)
-                currentView = Views.MultipleLightSources;
+            // Change view to the next assignment.
+            Views newView;
+
+            if (currentView.Equals(Views.MultipleLightSources))
+                newView = Views.CelShading;
+            else if (currentView.Equals(Views.CelShading))
+                newView = Views.ColorFilter;
+            else if (currentView.Equals(Views.ColorFilter))
+                newView = Views.GaussianBlur;
+            else
+                newView = Views.MultipleLightSources;
+
+            currentView = newView;
+            Console.WriteLine(currentView);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -343,6 +351,10 @@ namespace GraphicsPractical3
             postprocessingEffect.Parameters["IsGrayscale"].SetValue(isGrayscale);
             // Turn Gaussian blur on or off.
             postprocessingEffect.Parameters["IsGaussianBlurred"].SetValue(isGaussianBlurred);
+            if (isGaussianBlurred)
+            {
+                renderTarget = (RenderTarget2D)gaussianBlur.PerformGaussianBlur((Texture2D)renderTarget, renderTarget, spriteBatch);
+            }
             // Apply gamma correction.
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque,
                         SamplerState.LinearClamp, DepthStencilState.Default,
@@ -377,9 +389,10 @@ namespace GraphicsPractical3
             // Uniform scale.
             world = Matrix.CreateScale(0.5f);
             // Replace 'world' with 'scale' for the non-uniform scale demo.
-            Vector3 translation = new Vector3(0, 8.5f, 0) + modelTranslation;
+            Vector3 translation = new Vector3(0, 8.5f, -20f) + modelTranslation;
             Matrix translate = world * Matrix.CreateTranslation(translation);
-            simpleEffect.Parameters["World"].SetValue(translate);
+            Matrix rotate = translate * Matrix.CreateRotationY(modelRotation);
+            simpleEffect.Parameters["World"].SetValue(rotate);
             // Set world inverse transpose.
             worldInverseTransposeMatrix = Matrix.Transpose(Matrix.Invert(mesh.ParentBone.Transform * world));
             simpleEffect.Parameters["WorldInverseTranspose"].SetValue(worldInverseTransposeMatrix);
@@ -403,7 +416,8 @@ namespace GraphicsPractical3
             simpleEffect = mesh.Effects[0];
             translation = new Vector3(-25f, 8.5f, 0) + modelTranslation;
             translate = world * Matrix.CreateTranslation(translation);
-            simpleEffect.Parameters["World"].SetValue(translate);
+            rotate = translate * Matrix.CreateRotationY(modelRotation);
+            simpleEffect.Parameters["World"].SetValue(rotate);
             mesh.Draw();
 
             // Draw a third model.
@@ -412,7 +426,8 @@ namespace GraphicsPractical3
             simpleEffect = mesh.Effects[0];
             translation = new Vector3(25f, 8.5f, 0) + modelTranslation;
             translate = world * Matrix.CreateTranslation(translation);
-            simpleEffect.Parameters["World"].SetValue(translate);
+            rotate = translate * Matrix.CreateRotationY(modelRotation);
+            simpleEffect.Parameters["World"].SetValue(rotate);
             mesh.Draw();
 
             // Set the effect parameters.
@@ -460,6 +475,7 @@ namespace GraphicsPractical3
 
         private void DrawText()
         {
+            // Draw the assignment name and additional information for each view.
             StringBuilder buffer = new StringBuilder();
 
             buffer.AppendFormat("Assignment: {0}\n", currentView.ToString());
@@ -469,12 +485,17 @@ namespace GraphicsPractical3
             {
                 buffer.AppendFormat("Number of lights: {0}\n", directionalLights.Length);
                 buffer.AppendLine();
+                buffer.AppendFormat("Press <SPACE> to proceed to: {0}", Views.CelShading.ToString());
+            }
+            if (currentView == Views.CelShading)
+            {
+                buffer.AppendLine("Press <ENTER> to enable/disable the cel shading");
                 buffer.AppendFormat("Press <SPACE> to proceed to: {0}", Views.ColorFilter.ToString());
             }
             if (currentView == Views.ColorFilter)
             {
                 buffer.AppendLine("Press <ENTER> to enable/disable the grayscale");
-                buffer.AppendFormat("Press <SPACE> to proceed to: {0}", Views.ColorFilter.ToString());
+                buffer.AppendFormat("Press <SPACE> to proceed to: {0}", Views.GaussianBlur.ToString());
             }
             if (currentView == Views.GaussianBlur)
             {
@@ -482,12 +503,12 @@ namespace GraphicsPractical3
                 buffer.AppendFormat("Sigma: {0}\n", gaussianBlur.Sigma.ToString("f2"));
                 buffer.AppendLine();
                 buffer.AppendLine("Press <ENTER> to enable/disable the Gaussian blur");
-                buffer.AppendFormat("Press <SPACE> to proceed to: {0}", Views.ColorFilter.ToString());
+                buffer.AppendFormat("Press <SPACE> to proceed to: {0}", Views.MultipleLightSources.ToString());
             }
 
-            //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            buffer.AppendLine("\nUse the <LEFT> and <RIGHT> arrow keys to turn");
+
             spriteBatch.DrawString(spriteFont, buffer.ToString(), fontPosition, Color.White);
-            //spriteBatch.End();
         }
     }
 }

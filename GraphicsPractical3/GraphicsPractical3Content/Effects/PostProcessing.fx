@@ -1,6 +1,7 @@
 //------------------------------------------- Defines -------------------------------------------
 
 #define Pi 3.14159265
+// The radius needs to be the same as in Game1.cs
 #define RADIUS  7
 #define KERNEL_SIZE (RADIUS * 2 + 1)
 
@@ -35,7 +36,7 @@ float4 CalculateGamma(float4 color)
 {
 	// Correct by the given gamma value. The equations are simplified, because the colors range from 0-1.
 	float4 outputColor = color;
-		outputColor.r = pow(abs(color.r), 1.0 / Gamma);
+	outputColor.r = pow(abs(color.r), 1.0 / Gamma);
 	outputColor.g = pow(abs(color.g), 1.0 / Gamma);
 	outputColor.b = pow(abs(color.b), 1.0 / Gamma);
 
@@ -63,6 +64,7 @@ float4 PostProcessingPixelShader(float2 TextureCoordinate : TEXCOORD0) : COLOR0
 
 	if (IsGaussianBlurred)
 	{
+		// Apply the blur with the precalculated kernel.
 		for (int i = 0; i < KERNEL_SIZE; ++i)
 			color += tex2D(TextureSampler, TextureCoordinate + offsets[i]) * weights[i];
 	}

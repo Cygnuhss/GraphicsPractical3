@@ -1,3 +1,2 @@
 C:\Users\Yoni\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3Content\obj\x86\Debug\GraphicsPractical3Content.contentprojResolveAssemblyReference.cache
 C:\Users\ASUS\Desktop\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3Content\obj\x86\Debug\GraphicsPractical3Content.contentprojResolveAssemblyReference.cache
-C:\Users\ASUS\Dropbox\Universiteit\Jaar 2\Graphics\Practicums\GraphicsPractical3\GraphicsPractical3\GraphicsPractical3Content\obj\x86\Debug\GraphicsPractical3Content.contentprojResolveAssemblyReference.cache
